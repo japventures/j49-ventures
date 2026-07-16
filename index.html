@@ -4,116 +4,203 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>J49 Ventures | Family Office</title>
-  <meta name="description" content="J49 Ventures is a privately held family office focused on long-term value creation.">
-  <meta name="theme-color" content="#f7f3ec">
-  <link rel="icon" href="assets/images/j49-logo-cropped.png" type="image/png">
+  <meta name="description" content="J49 Ventures is a privately held family office focused on selective investments, strategic partnerships, and long-term ownership.">
+  <meta name="robots" content="index,follow">
+  <link rel="icon" href="assets/j49-logo.png">
   <style>
     :root {
-      --background: #f7f3ec;
-      --text: #2e2e2e;
-      --muted: #8a857f;
-      --line: #cfc7bc;
+      --bg: #f5f0e8;
+      --ink: #2d2c2a;
+      --muted: #79746d;
+      --line: #cfc6ba;
+      --page-x: clamp(28px, 6vw, 92px);
     }
 
     * { box-sizing: border-box; }
 
-    html, body { min-height: 100%; }
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--ink);
+    }
 
     body {
-      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      overflow-x: hidden;
+    }
+
+    .page {
       min-height: 100vh;
+      position: relative;
       display: grid;
       grid-template-rows: auto 1fr auto;
-      background: var(--background);
-      color: var(--text);
-      font-family: Arial, Helvetica, sans-serif;
-      -webkit-font-smoothing: antialiased;
+      padding: 34px var(--page-x) 28px;
+      isolation: isolate;
     }
 
-    header {
-      padding: 30px clamp(24px, 5vw, 72px) 0;
+    .page::after {
+      content: "";
+      position: absolute;
+      width: min(42vw, 620px);
+      aspect-ratio: 1;
+      right: -13vw;
+      top: 50%;
+      transform: translateY(-50%) rotate(45deg);
+      border: 1px solid rgba(45, 44, 42, 0.10);
+      z-index: -1;
     }
 
-    .logo {
+    .brand {
+      display: inline-block;
+      width: clamp(135px, 12vw, 190px);
+    }
+
+    .brand img {
       display: block;
-      width: clamp(145px, 14vw, 205px);
+      width: 100%;
       height: auto;
+      mix-blend-mode: multiply;
     }
 
     main {
       display: flex;
-      align-items: center;
-      padding: 8vh clamp(24px, 10vw, 150px);
+      align-items: flex-end;
+      padding: clamp(70px, 12vh, 150px) 0 clamp(70px, 11vh, 125px);
     }
 
-    .hero {
-      max-width: 790px;
+    .content {
+      max-width: 760px;
+    }
+
+    .eyebrow {
+      margin: 0 0 22px;
+      font-size: 12px;
+      line-height: 1;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--muted);
     }
 
     h1 {
       margin: 0;
-      max-width: 760px;
-      font-size: clamp(42px, 6vw, 86px);
-      line-height: .98;
-      letter-spacing: -0.04em;
+      max-width: 700px;
+      font-size: clamp(54px, 6.3vw, 96px);
+      line-height: 0.96;
       font-weight: 400;
+      letter-spacing: -0.055em;
+    }
+
+    .rule {
+      width: 68px;
+      height: 1px;
+      margin: 34px 0 26px;
+      background: var(--line);
     }
 
     .intro {
-      margin: 34px 0 0;
-      max-width: 635px;
-      font-size: clamp(17px, 1.55vw, 22px);
-      line-height: 1.65;
-      color: #5f5b56;
+      margin: 0;
+      max-width: 670px;
+      font-size: clamp(17px, 1.45vw, 22px);
+      line-height: 1.55;
+      color: #5f5b55;
     }
 
     .contact {
       display: inline-block;
-      margin-top: 38px;
-      padding-bottom: 5px;
-      color: var(--text);
-      font-size: 14px;
-      letter-spacing: .14em;
+      margin-top: 34px;
+      color: var(--ink);
       text-decoration: none;
+      font-size: 12px;
+      letter-spacing: 0.19em;
       text-transform: uppercase;
+      padding-bottom: 7px;
       border-bottom: 1px solid var(--line);
+      transition: border-color .2s ease, opacity .2s ease;
+    }
+
+    .contact:hover {
+      border-color: var(--ink);
+      opacity: .72;
     }
 
     footer {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       gap: 24px;
-      padding: 0 clamp(24px, 5vw, 72px) 28px;
-      color: var(--muted);
-      font-size: 12px;
-      letter-spacing: .08em;
+      color: #8b857d;
+      font-size: 11px;
+      letter-spacing: 0.13em;
       text-transform: uppercase;
     }
 
-    @media (max-width: 640px) {
-      header { padding-top: 22px; }
-      main { align-items: flex-start; padding-top: 18vh; }
-      .intro { margin-top: 26px; }
-      footer { flex-direction: column; gap: 8px; }
+    @media (max-width: 720px) {
+      .page {
+        padding-top: 24px;
+        padding-bottom: 22px;
+      }
+
+      .page::after {
+        width: 95vw;
+        right: -48vw;
+        top: 54%;
+      }
+
+      .brand {
+        width: 122px;
+      }
+
+      main {
+        align-items: center;
+        padding: 70px 0 60px;
+      }
+
+      h1 {
+        font-size: clamp(48px, 15vw, 70px);
+        max-width: 9ch;
+      }
+
+      .intro {
+        font-size: 17px;
+      }
+
+      footer {
+        align-items: flex-end;
+        font-size: 9px;
+      }
+
+      footer span:last-child {
+        text-align: right;
+      }
     }
   </style>
 </head>
 <body>
-  <header>
-    <img class="logo" src="assets/images/j49-logo-cropped.png" alt="J49 Ventures Family Office">
-  </header>
+  <div class="page">
+    <header>
+      <a class="brand" href="/" aria-label="J49 Ventures home">
+        <img src="assets/j49-logo.png" alt="J49 Ventures Family Office">
+      </a>
+    </header>
 
-  <main>
-    <section class="hero">
-      <h1>Building Long-Term Value.</h1>
-      <p class="intro">J49 Ventures is a privately held family office focused on selective investments, strategic partnerships, and long-term ownership.</p>
-      <a class="contact" href="mailto:contact@j49.mx">contact@j49.mx</a>
-    </section>
-  </main>
+    <main>
+      <section class="content" aria-labelledby="main-title">
+        <p class="eyebrow">Private Investment Office</p>
+        <h1 id="main-title">Building long-term value.</h1>
+        <div class="rule" aria-hidden="true"></div>
+        <p class="intro">
+          J49 Ventures is a privately held family office focused on selective investments,
+          strategic partnerships, and long-term ownership.
+        </p>
+        <a class="contact" href="mailto:contact@j49.mx">contact@j49.mx</a>
+      </section>
+    </main>
 
-  <footer>
-    <span>© 2026 J49 Ventures</span>
-    <span>The Woodlands, Texas</span>
-  </footer>
+    <footer>
+      <span>© 2026 J49 Ventures</span>
+      <span>The Woodlands, Texas</span>
+    </footer>
+  </div>
 </body>
 </html>
