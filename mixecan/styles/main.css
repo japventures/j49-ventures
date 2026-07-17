@@ -150,7 +150,7 @@ svg { overflow: visible; }
 .market .canvas { padding-top: 3.2vh; }
 .market .slide-label { margin-bottom: 4vh; }
 .market .slide-subtitle { margin-top: 1.2vh; }
-.market-layout { display: grid; grid-template-columns: 18% 53% 29%; height: 54%; margin-top: 2vh; }
+.market-layout { display: grid; grid-template-columns: 18% 53% 29%; height: 46%; margin-top: 2vh; }
 .funnel-labels { display: grid; grid-template-rows: repeat(5, 1fr); padding: 1% 0; }
 .funnel-labels article { position: relative; }
 .funnel-labels article::after { position: absolute; top: 32%; right: -20%; width: 28%; height: 1px; background: var(--gold); content: ""; }
@@ -231,9 +231,10 @@ tr.teal td em { color: #126b71; }
 .highlights li > span { display: grid; flex: 0 0 48px; width: 48px; height: 48px; place-items: center; color: #fff; font-family: var(--serif); font-size: 27px; background: radial-gradient(circle at 35% 35%, #0d3157, #001125 72%); border-radius: 50%; }
 .highlights b { color: var(--gold); font-size: clamp(10px, 1vw, 16px); letter-spacing: .04em; text-transform: uppercase; }
 .highlights p { margin: 5px 0 0; color: #142034; font-size: clamp(9px, .85vw, 14px); line-height: 1.45; }
-.invest-quote { position: absolute; right: var(--page-pad-x); bottom: 10.5vh; left: var(--page-pad-x); display: grid; grid-template-columns: 1fr repeat(3, auto); align-items: center; gap: 0; min-height: 11.5vh; margin: 0; padding: 1.2vh 2vw; border: 1px solid var(--gold); }
-.invest-quote q { padding-right: 2vw; font-family: var(--serif); font-size: clamp(15px, 1.55vw, 25px); font-style: italic; line-height: 1.35; }
-.invest-quote q::before { color: var(--gold); font-size: 4em; vertical-align: -.35em; }
+.invest-quote { position: absolute; right: var(--page-pad-x); bottom: 10.5vh; left: var(--page-pad-x); display: grid; grid-template-columns: 1fr repeat(3, auto); align-items: center; gap: 0; min-height: 10.5vh; margin: 0; padding: 1.2vh 2vw; border: 1px solid var(--gold); }
+.invest-quote q { position: relative; padding: 0 2vw 0 48px; font-family: var(--serif); font-size: clamp(14px, 1.4vw, 23px); font-style: italic; line-height: 1.3; }
+.invest-quote q::before { position: absolute; top: -.18em; left: 0; color: var(--gold); font-size: 3em; line-height: 1; }
+.invest-quote q::after { content: ""; }
 .invest-quote em { color: var(--gold); font-family: var(--sans); font-weight: 600; }
 .invest-quote div { min-width: 12vw; padding: 0 1.4vw; border-left: 1px solid var(--line); text-align: center; }
 .invest-quote strong, .invest-quote span { display: block; }
@@ -246,26 +247,16 @@ tr.teal td em { color: #126b71; }
 
 /* 12 — closing */
 .closing { background: #020b12; }
-.closing-photo { position: absolute; z-index: 0; inset: 0 30% 0 0; background: url("../assets/images/hero-drink.jpg") 55% center/cover no-repeat; }
-.closing-shade { position: absolute; z-index: 1; inset: 0 30% 0 0; background: linear-gradient(90deg, rgba(2,8,12,.88) 0%, rgba(2,8,12,.57) 45%, rgba(2,8,12,.05) 80%); }
-.closing-panel { position: absolute; z-index: 1; inset: 0 0 0 70%; background: radial-gradient(circle at 25% 45%, #0c2e50 0%, #061a30 48%, #031120 100%); }
-.closing-layout { display: grid; grid-template-columns: 70% 30%; padding: 0; }
-.closing-main { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: 7vh var(--page-pad-x); }
+.closing-photo { position: absolute; z-index: 0; inset: 0; background: url("../assets/images/hero-drink.jpg") center/cover no-repeat; }
+.closing-shade { position: absolute; z-index: 1; inset: 0; background: linear-gradient(90deg, rgba(2,8,12,.92) 0%, rgba(2,8,12,.68) 42%, rgba(2,8,12,.08) 76%); }
+.closing-layout { display: block; padding: 0; }
+.closing-main { display: flex; width: 100%; height: 100%; flex-direction: column; align-items: flex-start; justify-content: center; padding: 7vh var(--page-pad-x); }
 .closing-main .slide-label { position: absolute; top: 4.5vh; left: var(--page-pad-x); }
 .closing-main h2 { margin: 0; color: #fff; font-size: clamp(64px, 7vw, 116px); font-weight: 500; letter-spacing: .08em; text-transform: uppercase; }
 .closing-eyebrow { margin: 1.5vh 0 5vh; color: #d39838; font-size: clamp(14px, 1.3vw, 22px); font-weight: 500; letter-spacing: .13em; text-transform: uppercase; }
 .closing-brand { display: grid; gap: 10px; color: #fff; }
 .closing-brand strong { font-family: var(--serif); font-size: clamp(48px, 5.5vw, 90px); font-weight: 400; letter-spacing: .18em; line-height: .9; }
 .closing-brand span { color: #d39838; font-size: clamp(12px, 1.1vw, 18px); letter-spacing: .3em; text-transform: uppercase; }
-.closing-contact { display: flex; flex-direction: column; justify-content: center; padding: 8vh 3vw; border-left: 1px solid rgba(185,131,46,.75); }
-.closing-contact article { display: flex; align-items: flex-start; gap: 24px; padding: 3.5vh 0; }
-.closing-contact article + article { border-top: 1px solid rgba(185,131,46,.45); }
-.closing-contact .icon, .closing-symbol { flex: 0 0 46px; width: 46px; height: 46px; color: #d39838; }
-.closing-symbol { display: grid; place-items: center; font-family: var(--serif); font-size: 35px; border: 1px solid #d39838; border-radius: 50%; }
-.closing-contact b { color: #d39838; font-size: clamp(11px, 1vw, 16px); letter-spacing: .06em; text-transform: uppercase; }
-.closing-contact p { margin: 8px 0 0; color: #fff; font-size: clamp(11px, .98vw, 16px); line-height: 1.55; }
-.closing-contact a { text-decoration: none; }
-.closing-contact a:hover, .closing-contact a:focus-visible { color: #f0c77d; text-decoration: underline; }
 
 /* Motion is deliberately restrained and disabled when requested by the OS. */
 .reveal { opacity: 0; transform: translateY(18px); transition: opacity .75s ease, transform .75s ease; }

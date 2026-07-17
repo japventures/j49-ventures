@@ -56,7 +56,7 @@
   .market-stats { padding-top: 2vh; }
   .market-stats .icon { width: 44px; height: 44px; margin-bottom: 6px; }
   .market-stats b { margin-bottom: 7px; }
-  .market-layout { height: 50%; }
+  .market-layout { height: 44%; }
   .financial-chart { max-height: 32vh; }
   .cagr-callout .icon { flex-basis: 52px; width: 52px; height: 52px; }
   th, td { padding: 6px; }
@@ -200,20 +200,16 @@
   .invest-badges span + span { border-left: 0; }
   .invest-badges span { padding: 0; font-size: 11px; }
 
-  .closing { min-height: 1100px; }
-  .closing-photo { inset: 0 0 420px; background-position: 52% center; }
-  .closing-shade { inset: 0 0 420px; background: linear-gradient(90deg, rgba(2,8,12,.9), rgba(2,8,12,.35)); }
-  .closing-panel { inset: auto 0 0; height: 420px; }
-  .closing-layout { display: block; min-height: 1100px; }
-  .closing-main { height: 680px; padding: 90px 22px 45px; }
+  .closing { min-height: 100svh; }
+  .closing-photo { inset: 0; background-position: 58% center; }
+  .closing-shade { inset: 0; background: linear-gradient(90deg, rgba(2,8,12,.94), rgba(2,8,12,.58) 72%, rgba(2,8,12,.22)); }
+  .closing-layout { display: block; min-height: 100svh; }
+  .closing-main { height: 100svh; min-height: 700px; padding: 90px 22px 45px; }
   .closing-main .slide-label { top: 34px; left: 22px; }
   .closing-main h2 { font-size: clamp(48px, 15vw, 72px); }
   .closing-eyebrow { margin-bottom: 40px; font-size: 12px; line-height: 1.5; }
   .closing-brand strong { font-size: clamp(42px, 13vw, 62px); }
   .closing-brand span { font-size: 10px; }
-  .closing-contact { height: 420px; padding: 25px 28px; border-top: 1px solid rgba(185,131,46,.75); border-left: 0; }
-  .closing-contact article { gap: 18px; padding: 20px 0; }
-  .closing-contact p { font-size: 12px; }
 }
 
 @media (max-width: 420px) {
