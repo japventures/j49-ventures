@@ -12,8 +12,9 @@ Single-page investor deck implemented with semantic HTML5, CSS3, SVG and Vanilla
 - 06 — Market Opportunity
 - 08 — Financial Performance
 - 09 — Why Invest in Mixecan
+- 12 — Closing / Thank You
 
-The official numbering intentionally preserves the gap for slide 07. The folder structure is ready to receive the remaining approved slides later without renumbering the existing sections.
+The official numbering intentionally preserves the gaps for slides 07, 10 and 11. The folder structure is ready to receive the remaining approved slides later without renumbering the existing sections.
 
 ## Navigation
 

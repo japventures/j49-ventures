@@ -23,7 +23,7 @@
   .identity-market { padding-left: 0; }
   .identity-list article { gap: 12px; }
   .identity-list .icon { flex-basis: 52px; width: 52px; height: 52px; }
-  .market-top { height: 38%; }
+  .market-top { height: 35%; }
   .achievable .icon { flex-basis: 50px; width: 50px; height: 50px; }
   .financial-highlights .icon { width: 48px; height: 48px; }
   .invest-reasons .icon { width: 52px; height: 52px; }
@@ -49,14 +49,14 @@
   .company-lead { margin: 1.5vh 0; }
   .company-pillars { bottom: 5vh; }
   .portfolio .slide-label { margin-bottom: 2.5vh; }
-  .portfolio-image { height: 56%; }
+  .portfolio-image { height: 51%; }
   .identity-copy .slide-label { margin-bottom: 3vh; }
   .identity-market > h3 { margin-top: 2vh; }
   .identity-list article { padding-top: .8vh; padding-bottom: .8vh; }
   .market-stats { padding-top: 2vh; }
   .market-stats .icon { width: 44px; height: 44px; margin-bottom: 6px; }
   .market-stats b { margin-bottom: 7px; }
-  .market-layout { height: 59%; }
+  .market-layout { height: 50%; }
   .financial-chart { max-height: 32vh; }
   .cagr-callout .icon { flex-basis: 52px; width: 52px; height: 52px; }
   th, td { padding: 6px; }
@@ -66,7 +66,7 @@
   .invest-reasons article { min-height: 19vh; }
   .invest-reasons .icon { width: 44px; height: 44px; }
   .highlights li { min-height: 8.5vh; }
-  .invest-quote { min-height: 10vh; margin-top: 1vh; }
+  .invest-quote { min-height: 10vh; }
 }
 
 /* Mobile becomes a readable vertical document while retaining slide snap points. */
@@ -143,7 +143,7 @@
   .identity-market { padding: 55px 0 30px; }
   .identity-market > h3 { font-size: 18px; }
   .market-top { height: 400px; }
-  .market-top img { object-position: 37% center; }
+  .market-top img { width: auto; height: 100%; max-width: none; transform: translateX(-20%); }
   .market-stats { grid-template-columns: repeat(2, 1fr); gap: 0; }
   .market-stats article { min-height: 260px; padding: 25px 14px; }
   .market-stats article:nth-child(3) { border-left: 0; }
@@ -193,12 +193,27 @@
   .highlights li { min-height: 130px; }
   .highlights b { font-size: 12px; }
   .highlights p { font-size: 11px; }
-  .invest-quote { grid-template-columns: 1fr; gap: 20px; margin-top: 40px; padding: 22px; }
+  .invest-quote { position: static; grid-template-columns: 1fr; gap: 20px; margin-top: 40px; padding: 22px; }
   .invest-quote q { padding-right: 0; }
   .invest-quote div { padding: 15px 0 0; border-top: 1px solid var(--line); border-left: 0; }
   .invest-badges { grid-template-columns: 1fr; gap: 14px; position: static; margin-top: 35px; padding-top: 20px; }
   .invest-badges span + span { border-left: 0; }
   .invest-badges span { padding: 0; font-size: 11px; }
+
+  .closing { min-height: 1100px; }
+  .closing-photo { inset: 0 0 420px; background-position: 52% center; }
+  .closing-shade { inset: 0 0 420px; background: linear-gradient(90deg, rgba(2,8,12,.9), rgba(2,8,12,.35)); }
+  .closing-panel { inset: auto 0 0; height: 420px; }
+  .closing-layout { display: block; min-height: 1100px; }
+  .closing-main { height: 680px; padding: 90px 22px 45px; }
+  .closing-main .slide-label { top: 34px; left: 22px; }
+  .closing-main h2 { font-size: clamp(48px, 15vw, 72px); }
+  .closing-eyebrow { margin-bottom: 40px; font-size: 12px; line-height: 1.5; }
+  .closing-brand strong { font-size: clamp(42px, 13vw, 62px); }
+  .closing-brand span { font-size: 10px; }
+  .closing-contact { height: 420px; padding: 25px 28px; border-top: 1px solid rgba(185,131,46,.75); border-left: 0; }
+  .closing-contact article { gap: 18px; padding: 20px 0; }
+  .closing-contact p { font-size: 12px; }
 }
 
 @media (max-width: 420px) {
