@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>J49 Ventures | Family Office</title>
+  <meta name="description" content="J49 Ventures is a privately held family office focused on long-term ownership, strategic investments, and disciplined capital allocation.">
+  <meta name="theme-color" content="#f5f0e8">
+  <link rel="icon" href="assets/j49-logo.png">
+  <style>
+    :root{--bg:#f5f0e8;--ink:#2e2d2a;--muted:#777169;--line:rgba(46,45,42,.18);--page-x:clamp(24px,6vw,92px)}
+    *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--ink)}
+    body{font-family:Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}
+    .page{position:relative;min-height:100svh;overflow:hidden;display:grid;grid-template-rows:auto 1fr auto;padding:34px var(--page-x) 28px;isolation:isolate}
+    .geometry{position:absolute;inset:0;z-index:-1;pointer-events:none}
+    .diamond{position:absolute;width:min(48vw,690px);aspect-ratio:1;border:1px solid rgba(46,45,42,.065);transform:rotate(45deg);right:-17vw;top:50%;translate:0 -50%}
+    .diamond::after{content:"";position:absolute;inset:13%;border:1px solid rgba(46,45,42,.045)}
+    .brand{display:inline-block;width:clamp(126px,11vw,170px)}
+    .brand img{width:100%;display:block;mix-blend-mode:multiply}
+    main{display:flex;align-items:center;justify-content:flex-end;padding:clamp(70px,9vh,120px) 0}
+    .hero{width:min(620px,52vw);margin-right:clamp(0px,5vw,76px)}
+    .kicker{margin:0 0 24px;font-size:11px;letter-spacing:.27em;text-transform:uppercase;color:var(--muted)}
+    h1{margin:0;font-size:clamp(58px,6.7vw,104px);line-height:.91;letter-spacing:-.065em;font-weight:400;max-width:6.8ch}
+    .rule{width:62px;height:1px;background:var(--line);margin:34px 0 26px}
+    .intro{margin:0;max-width:560px;color:#5f5b55;font-size:clamp(17px,1.35vw,21px);line-height:1.58}
+    .contact{display:inline-block;margin-top:34px;padding-bottom:7px;color:var(--ink);text-decoration:none;font-size:11px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid var(--line);transition:opacity .2s ease,border-color .2s ease}
+    .contact:hover{opacity:.62;border-color:var(--ink)}
+    footer{display:flex;justify-content:space-between;gap:24px;color:#888179;font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+    @media(max-width:760px){.page{padding-top:24px;padding-bottom:22px}.brand{width:118px}main{justify-content:flex-start;align-items:center;padding:70px 0 60px}.hero{width:100%;margin:0}h1{font-size:clamp(52px,16vw,76px);max-width:7ch}.intro{font-size:17px;max-width:34rem}.diamond{width:108vw;right:-64vw;top:56%}footer{align-items:flex-end;font-size:8px}footer span:last-child{text-align:right}}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="geometry" aria-hidden="true"><div class="diamond"></div></div>
+    <header><a class="brand" href="/" aria-label="J49 Ventures home"><img src="assets/j49-logo.png" alt="J49 Ventures Family Office"></a></header>
+    <main>
+      <section class="hero">
+        <p class="kicker">Private Investment Office</p>
+        <h1>Building long-term value.</h1>
+        <div class="rule" aria-hidden="true"></div>
+        <p class="intro">J49 Ventures is a privately held family office focused on long-term ownership, strategic investments, and disciplined capital allocation.</p>
+        <a class="contact" href="mailto:contact@j49.mx">contact@j49.mx</a>
+      </section>
+    </main>
+    <footer><span>© 2026 J49 Ventures</span><span>The Woodlands, Texas</span></footer>
+  </div>
+</body>
+</html>
