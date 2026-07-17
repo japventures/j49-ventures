@@ -1,5 +1,3 @@
-# J49 Ventures — Phase 1
+# J49 Ventures
 
-Upload the contents of this folder to the root of the GitHub repository.
-
-This version intentionally contains no public references to private opportunities.
+Minimal institutional website for j49.mx.
