@@ -1,20 +1,15 @@
 # Formspree J49
-Project ID: `3101276555863654301` (public identifier).
-Form key: `bfitAdmin`.
+Project ID: `3101276555863654301`. Form key: `bfitAdmin`.
+Public submission URL: https://formspree.io/p/3101276555863654301/f/bfitAdmin
 
-The repository secrets FORMSPREE_DEPLOY_KEY and BFIT_NOTIFICATION_EMAIL are consumed only by the manually triggered Formspree J49 workflow, restricted to main. It does not publish the website or expose secrets in frontend code.
+The URL format is the project route implemented by the official @formspree/core 4.0.0 submitForm client. No React migration or deploy credential is required in the browser.
 
-Status: draft integration. Workflow has not run. CLI installation currently resolves the published version; pin a verified version before production deployment.
+GitHub Actions runs browser tests and then deploys formspree.json with @formspree/cli 0.9.6. The secrets FORMSPREE_DEPLOY_KEY and BFIT_NOTIFICATION_EMAIL are available only to the deployment step. The initial integration branch and main trigger the workflow; remove the integration branch trigger after launch. A manual trigger is also available.
 
-Remaining activation steps:
-1. Verify the configuration and deploy workflow, then merge when ready.
-2. Run Formspree J49 from Actions on main. Confirm the Deploy Key belongs to the intended J49 project.
-3. Complete the browser integration for the CLI-created form. The CLI documentation describes the React provider; the current static questionnaire uses an endpoint placeholder and does not yet use that provider. Do not enable it until a supported integration is verified.
-4. Test rendering, validation, error handling and successful receipt using synthetic answers.
-5. Confirm notification delivery to the intended recipient before inviting respondents.
+Tests cover identity validation, row addition/removal, percentage total, consent, 24 answers in payload, failed submission retention, successful submission UI and mobile overflow. Test requests are intercepted and never submit respondent data.
 
-The questionnaire stays in review mode while bfit-admin/config.js has no endpoint. No homepage navigation link is added. noindex does not provide access control.
+Real submission and notification delivery must be verified separately. Do not claim email delivery based solely on an HTTP response. GitHub Pages publishes the static folder after merge; verify the Pages workflow and live URL.
 
-Future forms can be added to formspree.json under distinct keys, preserving existing entries. Other Formspree projects need their own deploy credentials.
+For future questionnaires, add distinct form keys to formspree.json without removing existing forms. Each independent project needs its own deploy credential. Public project identifiers are not secrets.
 
-Official docs: https://help.formspree.io/articles/using-the-cli/the-formspree-cli
+No homepage links are added. noindex is not authentication.

@@ -1,3 +1,2 @@
-// Add the dedicated endpoint after verifying its recipient in Formspree.
-// Public form IDs are not secret keys. Never put account/API credentials here.
-window.BFIT_FORM_CONFIG = Object.freeze({ endpoint: '' });
+// Public project and form identifiers; credentials remain in GitHub secrets.
+window.BFIT_FORM_CONFIG = Object.freeze({ endpoint: 'https://formspree.io/p/3101276555863654301/f/bfitAdmin' });
