@@ -1,0 +1,57 @@
+name: Formspree J49
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, codex/bfit-admin-questionnaire]
+    paths: ['bfit-admin/**', 'formspree.json', 'scripts/test-bfit.cjs', '.github/workflows/formspree.yml']
+permissions:
+  contents: read
+concurrency:
+  group: formspree-j49
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save --ignore-scripts playwright@1.63.0
+      - run: npx playwright install --with-deps chromium
+      - run: node --check bfit-admin/form.js
+      - run: node scripts/test-bfit.cjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bfit-browser-previews
+          path: |
+            mobile.png
+            desktop.png
+  deploy:
+    needs: verify
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check required secrets
+        env:
+          FORMSPREE_DEPLOY_KEY: ${{ secrets.FORMSPREE_DEPLOY_KEY }}
+          BFIT_NOTIFICATION_EMAIL: ${{ secrets.BFIT_NOTIFICATION_EMAIL }}
+        run: |
+          test -n "$FORMSPREE_DEPLOY_KEY" || { echo "Missing FORMSPREE_DEPLOY_KEY"; exit 1; }
+          test -n "$BFIT_NOTIFICATION_EMAIL" || { echo "Missing BFIT_NOTIFICATION_EMAIL"; exit 1; }
+      - run: npm install --global @formspree/cli@0.9.6
+      - name: Deploy form configuration
+        env:
+          FORMSPREE_DEPLOY_KEY: ${{ secrets.FORMSPREE_DEPLOY_KEY }}
+          BFIT_NOTIFICATION_EMAIL: ${{ secrets.BFIT_NOTIFICATION_EMAIL }}
+        run: formspree deploy
