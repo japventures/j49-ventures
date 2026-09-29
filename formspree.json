@@ -1,0 +1,19 @@
+{
+  "forms": {
+    "bfitAdmin": {
+      "name": "BFIT · Diagnóstico administrativo",
+      "fields": {
+        "email": {
+          "type": "email",
+          "required": true
+        }
+      },
+      "actions": [
+        {
+          "type": "email",
+          "to": "$BFIT_NOTIFICATION_EMAIL"
+        }
+      ]
+    }
+  }
+}

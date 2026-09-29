@@ -1,0 +1,34 @@
+name: Formspree J49
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: formspree-j49
+  cancel-in-progress: false
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check required secrets
+        env:
+          FORMSPREE_DEPLOY_KEY: ${{ secrets.FORMSPREE_DEPLOY_KEY }}
+          BFIT_NOTIFICATION_EMAIL: ${{ secrets.BFIT_NOTIFICATION_EMAIL }}
+        run: |
+          test -n "$FORMSPREE_DEPLOY_KEY" || { echo "Missing FORMSPREE_DEPLOY_KEY"; exit 1; }
+          test -n "$BFIT_NOTIFICATION_EMAIL" || { echo "Missing BFIT_NOTIFICATION_EMAIL"; exit 1; }
+      - name: Install official CLI
+        run: npm install --global @formspree/cli
+      - name: Deploy form configuration
+        env:
+          FORMSPREE_DEPLOY_KEY: ${{ secrets.FORMSPREE_DEPLOY_KEY }}
+          BFIT_NOTIFICATION_EMAIL: ${{ secrets.BFIT_NOTIFICATION_EMAIL }}
+        run: formspree deploy
