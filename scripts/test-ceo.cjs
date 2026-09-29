@@ -1,0 +1,58 @@
+const {chromium}=require('playwright');
+const assert=require('node:assert/strict');
+const {pathToFileURL}=require('node:url');
+const path=require('node:path');
+(async()=>{
+const browser=await chromium.launch({headless:true});
+for(const company of ['BFIT','FTN']){
+const page=await browser.newPage({viewport:{width:1280,height:900}});
+const errors=[];page.on('pageerror',e=>errors.push(e.message));
+await page.goto(pathToFileURL(path.resolve(company.toLowerCase()+'-ceo/index.html')).href);
+assert.equal(await page.locator('fieldset').count(),15);
+assert.equal(await page.locator('#setup').isVisible(),false);
+assert.equal(await page.locator('body').innerText().then(t=>t.includes('Formspree')),false);
+await page.locator('#next').click();assert.match(await page.locator('#step-text').innerText(),/Paso 1/);
+await page.locator('[name=Nombre]').fill('PRUEBA CEO');
+await page.locator('[name=email]').fill('qa@example.com');
+await page.locator('[data-q="1"] input').first().fill('<img src=x onerror=alert(1)>');
+await page.locator('[data-q="1"] button').last().click();
+assert.equal(await page.locator('[data-q="1"] .repeat-row').count(),2);
+await page.locator('[data-q="1"] .repeat-row').last().locator('button').click();
+await page.locator('#next').click();
+assert.equal(await page.locator('[data-q="4"] select').count(),7);
+await page.locator('[data-q="4"] select').first().selectOption({label:'No tengo evidencia suficiente'});
+await page.locator('#next').click();
+const checks=page.locator('[data-q="7"] input');
+for(let i=0;i<4;i++)await checks.nth(i).check().catch(()=>{});
+assert.equal(await page.locator('[data-q="7"] input:checked').count(),3);
+await checks.last().check();assert.equal(await page.locator('[data-q="7"] input:checked').count(),1);
+await page.locator('[data-q="9"] input').first().check();
+await page.locator('#next').click();await page.locator('#next').click();
+assert.match(await page.locator('[data-q="13"]').innerText(),new RegExp(company));
+await page.locator('#next').click();assert.match(await page.locator('#step-text').innerText(),/Paso 6 de 6/);
+assert.equal(await page.locator('#answers img').count(),0);
+assert.match(await page.locator('#answers').innerText(),/No tengo evidencia suficiente/);
+await page.locator('#send').click();assert.match(await page.locator('#status').innerText(),/Confirma/);
+await page.locator('#consent').check();
+let payload,url;
+await page.route('https://formspree.io/**',r=>{payload=r.request().postDataJSON();url=r.request().url();return r.fulfill({status:500,contentType:'application/json',body:'{"error":"test"}'});});
+await page.locator('#send').click();await page.waitForFunction(()=>document.querySelector('#status').textContent.includes('No pudimos'));
+assert.equal(payload.Empresa,company);
+assert.equal(Object.keys(payload).filter(k=>/^\d+\./.test(k)).length,15);
+assert.ok(url.endsWith('/'+company.toLowerCase()+'Ceo'));
+assert.equal(await page.locator('[name=Nombre]').inputValue(),'PRUEBA CEO');
+await page.unroute('https://formspree.io/**');
+await page.route('https://formspree.io/**',r=>r.fulfill({status:200,contentType:'application/json',body:'{"ok":true,"next":"/thanks"}'}));
+await page.locator('#send').click();await page.locator('#success').waitFor({state:'visible'});
+await page.reload();await page.setViewportSize({width:390,height:844});
+for(let i=0;i<5;i++){await page.locator('#sections button').nth(i).click();assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);}
+await page.locator('#sections button').nth(1).click();
+await page.screenshot({path:'ceo-'+company+'-mobile.png',fullPage:true});
+await page.setViewportSize({width:1280,height:900});
+await page.screenshot({path:'ceo-'+company+'-desktop.png',fullPage:true});
+assert.deepEqual(errors,[]);
+await page.close();
+console.log(company+': PASS (15 questions, ratings, limits, exclusivity, identity, consent, escaped review, endpoints, error retention, success and mobile)');
+}
+await browser.close();
+})().catch(e=>{console.error(e);process.exit(1)});
