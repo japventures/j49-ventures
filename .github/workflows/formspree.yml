@@ -2,8 +2,8 @@ name: Formspree J49
 on:
   workflow_dispatch:
   push:
-    branches: [main, codex/bfit-admin-questionnaire]
-    paths: ['bfit-admin/**', 'formspree.json', 'scripts/test-bfit.cjs', '.github/workflows/formspree.yml']
+    branches: [main, codex/ceo-questionnaires]
+    paths: ['bfit-admin/**', 'bfit-ceo/**', 'ftn-ceo/**', 'scripts/test-ceo.cjs', 'formspree.json', 'scripts/test-bfit.cjs', '.github/workflows/formspree.yml']
 permissions:
   contents: read
 concurrency:
@@ -24,12 +24,14 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: node --check bfit-admin/form.js
       - run: node scripts/test-bfit.cjs
+      - run: node scripts/test-ceo.cjs
       - uses: actions/upload-artifact@v4
         with:
           name: bfit-browser-previews
           path: |
             mobile.png
             desktop.png
+            ceo-*.png
   deploy:
     needs: verify
     if: github.event_name != 'pull_request'
