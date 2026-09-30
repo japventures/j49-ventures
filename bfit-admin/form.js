@@ -1,37 +1,324 @@
 'use strict';
 const sections = [
- {title:'Alcance',questions:[
- [1,'¿Qué empresas, razones sociales, marcas y ubicaciones atiende tu departamento?','Confirma su relación con BFIT y FTN.','rows',['Empresa o razón social','Marca / ubicación','Servicios del departamento','Responsable local']],
- [2,'¿Cuáles son los cinco resultados más importantes que Dirección espera de tu área?','Indica cuáles se cumplen de forma consistente y cuáles presentan dificultades.'],
- [3,'¿Qué responsabilidades o decisiones no están claramente delimitadas?','Considera administración, ventas, operaciones y Dirección. Incluye un ejemplo reciente.']]},
- {title:'Equipo',questions:[
- [4,'¿Quiénes participan en el departamento y qué hace cada persona?','Incluye apoyos y funciones compartidas entre ubicaciones.','rows',['Persona y puesto','Ubicación / empresas','A quién reporta','Responsabilidades principales','Entregables y frecuencia','Quién la cubre']],
- [5,'¿Qué actividades dependen de una sola persona?','¿Qué sucede cuando falta o se retrasa?'],
- [6,'¿Qué puede resolver el equipo por su cuenta y qué requiere tu revisión?','Distingue revisiones necesarias por control de las que haces para asegurar la calidad.']]},
- {title:'Carga de trabajo',questions:[
- [7,'Mapeo de actividades del departamento','Incluye pagos, proveedores, conciliaciones, ingresos, facturación, portales, contabilidad, cierre, reportes y recursos humanos. Usa estimaciones.','rows',['Actividad y resultado esperado','Empresa / ubicación','Quién ejecuta / revisa','Frecuencia y volumen','Horas semanales aproximadas','Archivo o sistema','Retraso o problema habitual']],
- [8,'¿Qué explica la diferencia de carga entre Puebla y Aguascalientes?','Compara volumen, empresas atendidas, complejidad, tareas manuales y capacidad. ¿Qué práctica podrías trasladar?'],
- [9,'¿Qué actividades se retrasan, se hacen parcialmente o han dejado de hacerse?','Indica desde cuándo, consecuencias y causas.'],
- [10,'¿Dónde se genera más retrabajo?','Selecciona lo que aplique y describe dos o tres ejemplos con el tiempo que consumen.','checks',['Capturas duplicadas','Correcciones','Buscar información','Cambios de archivos','Aclaraciones con otras áreas','Otro']]]},
- {title:'Procesos',questions:[
- [11,'Describe el último cierre mensual','¿Cuándo debía terminar y cuándo terminó? ¿Qué se entregó, qué quedó pendiente, de quién dependía y quién dio el cierre por concluido?'],
- [12,'¿Cómo se comprueba que las ventas coincidan con los ingresos recibidos?','Quién entrega información, realiza el amarre, investiga diferencias y confirma su resolución. Aclara la participación de ventas, contabilidad y tesorería.'],
- [13,'¿Cómo funciona el proceso de proveedores y pagos?','Desde el alta hasta la comprobación y conciliación. Quién solicita, valida, autoriza, ejecuta y revisa. Incluye excepciones frecuentes.'],
- [14,'¿Qué información utilizas para conocer el efectivo disponible y los compromisos próximos?','Quién la prepara, frecuencia, confiabilidad y cómo opera actualmente el “profit”.'],
- [15,'¿Qué archivos y sistemas sostienen la operación?','Identifica responsables, versiones, accesos y respaldos. Para el ERP: cuál es, etapa, líder y tareas que espera de tu equipo.','checks',['Excel / hojas de cálculo','Sistema contable','Portales de clientes / proveedores','ERP en implementación','ERP en uso','Otro']]]},
- {title:'Tu rol',questions:[
- [16,'¿Cómo distribuyes actualmente tu tiempo?','Ajusta las barras o escribe los porcentajes. Usa una semana habitual. El total debe sumar 100%.','sliders',['Ejecutar tareas operativas','Revisar y corregir trabajo','Coordinar, capacitar y dar seguimiento','Analizar información y proponer decisiones','Atender urgencias y solicitudes no planeadas']],
- [17,'¿Qué tres actividades deberías delegar y qué impide hacerlo?','A quién podrían pasar y qué necesita: claridad, capacitación, acceso, práctica, autoridad o tiempo.'],
- [18,'¿Qué apoyo necesitas para ejercer mejor tu rol de gerente?','¿Qué te gustaría resolver con mayor autonomía en tres meses? Selecciona apoyos y explica.','checks',['Autoridad para decidir','Respaldo de Dirección','Colaboración de otras áreas','Capacitación técnica','Delegación y liderazgo','Tiempo para análisis','Otro']]]},
- {title:'Desarrollo del equipo',questions:[
- [19,'Responsabilidades de la persona que tendrá el plan de desarrollo','Confirma su alcance en pagos, proveedores y amarre de ingresos. Describe hechos observables.','rows',['Persona / puesto','Responsabilidad','Resultado esperado y fecha','Qué realiza con autonomía','En qué requiere apoyo','Ejemplo reciente verificable']],
- [20,'¿Qué explica las dificultades observadas?','Incluye capacitación recibida, acompañamiento y resultados. Señala también qué hace bien y cómo aprovechar sus fortalezas.','checks',['Instrucciones poco claras','Conocimientos','Manejo de archivos','Cambios de herramienta','Carga de trabajo','Información incompleta','Seguimiento','Otro']],
- [21,'¿Qué tres mejoras concretas serían razonables en 60–90 días?','Acuerdos de desarrollo y expectativas claras.','rows',['Mejora esperada','Situación actual','Evidencia para medirla','Apoyo o capacitación','Fecha de revisión']]]},
- {title:'Próximos proyectos',questions:[
- [22,'¿Qué trabajo adicional traerán los proyectos próximos?','Confirma aperturas, planta de Aguascalientes, documentación bancaria, ERP y otros proyectos, con nombres y fechas.','rows',['Proyecto','Fecha / siguiente hito','Entregables del departamento','Responsable','Capacidad adicional estimada','Dependencias o bloqueos']],
- [23,'¿Dónde ves una necesidad real de refuerzo y qué evidencia la sustenta?','Incluye recursos humanos. ¿Qué resolverías reorganizando o simplificando y qué requeriría capacidad adicional?']]},
- {title:'Prioridades',questions:[
- [24,'¿Qué tres problemas priorizarías en los primeros 90 días?','Describe también la disponibilidad real de tu equipo para implementar mejoras.','rows',['Prioridad (1, 2 o 3)','Problema','Impacto actual','Resultado a 90 días','Apoyo requerido']]]}
+  {
+    "title": "Alcance",
+    "questions": [
+      [
+        1,
+        "¿Qué empresas, razones sociales, marcas y ubicaciones atiende tu departamento?",
+        "Confirma su relación con BFIT y FTN.",
+        "rows",
+        [
+          "Empresa o razón social",
+          "Marca / ubicación",
+          "Servicios del departamento",
+          "Responsable local"
+        ]
+      ],
+      [
+        2,
+        "¿Qué debe garantizar tu departamento y qué resultados esperan de ti los CEOs de BFIT y FTN?",
+        "Distingue las expectativas acordadas de las que todavía debes aclarar. ¿Qué funciona bien y qué requiere atención?"
+      ],
+      [
+        3,
+        "¿Qué responsabilidades o decisiones no están claramente delimitadas?",
+        "Incluye decisiones que puedes tomar, autorizaciones necesarias y cómo resuelven prioridades entre empresas. Describe un ejemplo reciente."
+      ]
+    ]
+  },
+  {
+    "title": "Equipo",
+    "questions": [
+      [
+        4,
+        "¿Quiénes participan en el departamento y qué hace cada persona?",
+        "Incluye apoyos y funciones compartidas entre ubicaciones.",
+        "rows",
+        [
+          "Persona y puesto",
+          "Ubicación / empresas",
+          "A quién reporta",
+          "Responsabilidades principales",
+          "Entregables y frecuencia",
+          "Quién la cubre"
+        ]
+      ],
+      [
+        5,
+        "Si tú o una persona clave se ausenta una semana, ¿qué podría dejar de funcionar?",
+        "Identifica actividades críticas, instrucciones disponibles y quién ha probado cubrirlas."
+      ],
+      [
+        6,
+        "¿Qué puede resolver el equipo por su cuenta y qué requiere tu revisión?",
+        "Distingue revisiones necesarias por control de las que haces para asegurar la calidad."
+      ]
+    ]
+  },
+  {
+    "title": "Carga de trabajo",
+    "questions": [
+      [
+        7,
+        "Mapeo de actividades del departamento",
+        "Incluye pagos, proveedores, conciliaciones, ingresos, facturación, portales, contabilidad, cierre, reportes y recursos humanos. Usa estimaciones.",
+        "rows",
+        [
+          "Actividad y resultado esperado",
+          "Empresa / ubicación",
+          "Quién ejecuta / revisa",
+          "Frecuencia y volumen",
+          "Horas semanales aproximadas",
+          "Archivo o sistema",
+          "Retraso o problema habitual"
+        ]
+      ],
+      [
+        8,
+        "¿Cómo se compara la carga de trabajo de Puebla y Aguascalientes?",
+        "Compara volumen, complejidad y capacidad con ejemplos. No es necesario que exista una diferencia; identifica también prácticas que podrían compartirse."
+      ],
+      [
+        9,
+        "¿Qué actividades se retrasan, se hacen parcialmente o han dejado de hacerse?",
+        "Indica desde cuándo, consecuencias y causas."
+      ],
+      [
+        10,
+        "¿Dónde se genera más retrabajo?",
+        "Selecciona lo que aplique y describe dos o tres ejemplos con el tiempo que consumen.",
+        "checks",
+        [
+          "Capturas duplicadas",
+          "Correcciones",
+          "Buscar información",
+          "Cambios de archivos",
+          "Aclaraciones con otras áreas",
+          "Otro"
+        ]
+      ]
+    ]
+  },
+  {
+    "title": "Procesos",
+    "questions": [
+      [
+        11,
+        "Describe el último cierre mensual",
+        "¿Cuándo debía terminar y cuándo terminó? ¿Qué se entregó, qué quedó pendiente, de quién dependía y quién dio el cierre por concluido?"
+      ],
+      [
+        12,
+        "¿Cómo se comprueba que las ventas coincidan con los ingresos recibidos?",
+        "Quién entrega información, realiza el amarre, investiga diferencias y confirma su resolución. Aclara la participación de ventas, contabilidad y tesorería."
+      ],
+      [
+        13,
+        "¿Cómo funciona el proceso de proveedores y pagos?",
+        "¿Quién da de alta proveedores, modifica sus cuentas bancarias, solicita, autoriza, ejecuta y concilia pagos? ¿Qué revisiones separan estas funciones y cómo se atienden excepciones? No incluyas números de cuenta."
+      ],
+      [
+        14,
+        "¿Cómo determinan el efectivo disponible y anticipan los compromisos de pago?",
+        "Describe la proyección de caja, su horizonte y frecuencia. Explica cómo opera actualmente el “profit”: asignaciones, reservas, responsables y cuándo se modifican o utilizan."
+      ],
+      [
+        15,
+        "¿Qué archivos y sistemas sostienen la operación?",
+        "¿Qué se captura más de una vez y cuál es el registro oficial? Para el ERP/Odoo, si aplica: etapa, responsable, problemas que debe resolver y quién validará los datos.",
+        "checks",
+        [
+          "Excel / hojas de cálculo",
+          "Sistema contable",
+          "Portales de clientes / proveedores",
+          "ERP en implementación",
+          "ERP en uso",
+          "Otro"
+        ]
+      ],
+      [
+        16,
+        "¿Qué decisiones se retrasan o se toman con información incompleta?",
+        "Describe hasta tres casos: quién decide, qué información necesita, cuándo y qué ocurre si falta.",
+        "rows",
+        [
+          "Decisión",
+          "Quién la necesita",
+          "Información faltante",
+          "Cuándo se requiere",
+          "Consecuencia"
+        ]
+      ],
+      [
+        17,
+        "¿Qué cifras consideras confiables y cuáles requieren revisión?",
+        "Describe cómo se validan, de qué registro provienen y qué diferencias están pendientes.",
+        "rows",
+        [
+          "Cifra o reporte",
+          "Fuente oficial",
+          "Cómo se valida",
+          "Pendiente o diferencia",
+          "Responsable"
+        ]
+      ],
+      [
+        18,
+        "¿Cómo elaboran y controlan el presupuesto?",
+        "Indica si existe por empresa, ubicación o área; quién prepara y autoriza; cómo consideran gastos comprometidos y qué hacen ante desviaciones. Si no existe, describe cómo deciden cuánto gastar."
+      ],
+      [
+        19,
+        "¿Dónde hay oportunidades para proteger efectivo o mejorar la rentabilidad?",
+        "Incluye hasta tres: gastos evitables, duplicidades, recargos, condiciones de compra, cartera o inventarios. Distingue ahorro, recuperación de efectivo y prevención de pérdidas.",
+        "rows",
+        [
+          "Oportunidad",
+          "Evidencia o ejemplo",
+          "Impacto estimado, si lo conoces",
+          "Acción posible"
+        ]
+      ]
+    ]
+  },
+  {
+    "title": "Tu rol",
+    "questions": [
+      [
+        20,
+        "¿Cómo distribuyes actualmente tu tiempo?",
+        "Ajusta las barras o escribe los porcentajes. Usa una semana habitual. El total debe sumar 100%.",
+        "sliders",
+        [
+          "Ejecutar tareas operativas",
+          "Revisar y corregir trabajo",
+          "Coordinar, capacitar y dar seguimiento",
+          "Analizar información y proponer decisiones",
+          "Atender urgencias y solicitudes no planeadas"
+        ]
+      ],
+      [
+        21,
+        "¿Qué tres actividades deberías delegar y qué impide hacerlo?",
+        "A quién podrían pasar y qué necesita: claridad, capacitación, acceso, práctica, autoridad o tiempo."
+      ],
+      [
+        22,
+        "¿Qué apoyo necesitas para ejercer mejor tu rol de gerente?",
+        "¿Qué te gustaría resolver con mayor autonomía en tres meses? Selecciona apoyos y explica.",
+        "checks",
+        [
+          "Autoridad para decidir",
+          "Respaldo de Dirección",
+          "Colaboración de otras áreas",
+          "Capacitación técnica",
+          "Delegación y liderazgo",
+          "Tiempo para análisis",
+          "Otro"
+        ]
+      ]
+    ]
+  },
+  {
+    "title": "Desarrollo del equipo",
+    "questions": [
+      [
+        23,
+        "¿Qué fortalezas tiene el equipo y qué capacidades necesita desarrollar?",
+        "Considera al equipo completo. Describe conductas y resultados observables; los planes individuales se trabajarán por separado.",
+        "rows",
+        [
+          "Puesto o función",
+          "Fortaleza que conviene aprovechar",
+          "Capacidad por desarrollar",
+          "Ejemplo observable",
+          "Apoyo o capacitación"
+        ]
+      ],
+      [
+        24,
+        "¿Qué factores explican las dificultades del equipo?",
+        "Distingue conocimientos, instrucciones, carga, herramientas y apoyo. Describe un ejemplo y qué se ha intentado para resolverlo.",
+        "checks",
+        [
+          "Instrucciones poco claras",
+          "Conocimientos",
+          "Manejo de archivos",
+          "Cambios de herramienta",
+          "Carga de trabajo",
+          "Información incompleta",
+          "Seguimiento",
+          "Otro"
+        ]
+      ],
+      [
+        25,
+        "¿Qué mejoras del equipo serían razonables en los próximos 90 días?",
+        "Incluye hasta tres mejoras y el apoyo necesario. Puedes referirte a puestos o funciones.",
+        "rows",
+        [
+          "Mejora esperada",
+          "Situación actual",
+          "Evidencia para medirla",
+          "Apoyo o capacitación",
+          "Fecha de revisión"
+        ]
+      ],
+      [
+        26,
+        "¿Cómo asignan y revisan los compromisos del departamento?",
+        "Describe reuniones, responsables, fechas y evidencia de cumplimiento. ¿Qué hacen ante retrasos, errores y problemas que se repiten?"
+      ]
+    ]
+  },
+  {
+    "title": "Próximos proyectos",
+    "questions": [
+      [
+        27,
+        "¿Qué trabajo adicional traerán los proyectos próximos?",
+        "Incluye únicamente proyectos confirmados o previstos y aclara su estado: aperturas, planta, banco, ERP u otros.",
+        "rows",
+        [
+          "Proyecto",
+          "Fecha / siguiente hito",
+          "Entregables del departamento",
+          "Responsable",
+          "Capacidad adicional estimada",
+          "Dependencias o bloqueos"
+        ]
+      ],
+      [
+        28,
+        "¿Dónde ves una necesidad real de refuerzo y qué evidencia la sustenta?",
+        "Incluye recursos humanos. ¿Qué resolverías reorganizando o simplificando y qué requeriría capacidad adicional?"
+      ]
+    ]
+  },
+  {
+    "title": "Prioridades",
+    "questions": [
+      [
+        29,
+        "Si dentro de 12 meses el departamento funcionara como debería, ¿qué sería diferente?",
+        "Describe cambios observables en información, controles, presupuesto, procesos y autonomía. ¿Qué tendría que cambiar en tu propio rol?"
+      ],
+      [
+        30,
+        "¿Qué tres problemas priorizarías en los primeros 90 días?",
+        "Describe también la disponibilidad real de tu equipo para implementar mejoras.",
+        "rows",
+        [
+          "Prioridad (1, 2 o 3)",
+          "Problema",
+          "Impacto actual",
+          "Resultado a 90 días",
+          "Apoyo requerido"
+        ]
+      ]
+    ]
+  }
 ];
 const form=document.querySelector('#questionnaire'),fields=document.querySelector('#fields'),nav=document.querySelector('#sections'),status=document.querySelector('#status');
 let step=0,busy=false,serial=0;
@@ -56,5 +343,5 @@ document.querySelector('#back').onclick=()=>show(Math.max(0,step-1),true);
 document.querySelector('#next').onclick=()=>{if(step===0&&!identityValid())return;if(step===4&&!total()){status.textContent='La distribución debe sumar 100% antes de continuar.';return;}show(Math.min(8,step+1),true);};
 const endpoint=window.BFIT_FORM_CONFIG?.endpoint||'',enabled=/^https:\/\/formspree\.io\/(?:p\/[0-9]+\/)?f\/[a-zA-Z0-9]+$/.test(endpoint);
 document.querySelector('#setup').hidden=enabled;document.querySelector('#send').disabled=!enabled;
-form.onsubmit=async e=>{e.preventDefault();if(busy||!enabled)return;if(step!==8){show(8,true);return;}if(!identityValid())return;if(!total()){show(4,true);status.textContent='Ajusta la distribución del tiempo hasta sumar 100%.';return;}if(!document.querySelector('#consent').checked){status.textContent='Confirma que revisaste tus respuestas para enviarlas.';document.querySelector('#consent').focus();return;}busy=true;const buttons=[...document.querySelectorAll('button')];buttons.forEach(b=>b.disabled=true);status.textContent='Enviando respuestas…';status.className='';const payload={Nombre:form.elements.Nombre.value.trim(),email:form.elements.email.value.trim(),_subject:'Diagnóstico administrativo BFIT y FTN',Version:'BFIT-ADMIN-1',Disponibilidad:form.elements.Disponibilidad.value,Documentos:form.elements.Documentos.value};sections.forEach(s=>s.questions.forEach(q=>payload[`${q[0]}. ${q[1]}`]=answer(q).trim()||'Pendiente / sin respuesta'));const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),30000);try{const res=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload),signal:controller.signal});const result=await res.json();if(!res.ok||result.errors||result.error)throw new Error('server');form.hidden=true;nav.hidden=true;document.querySelector('.progress-row').hidden=true;document.querySelector('#success').hidden=false;document.querySelector('#success').focus();}catch(err){status.className='error';status.textContent=err.name==='AbortError'?'No pudimos confirmar la recepción a tiempo. Conservamos tus respuestas en esta página. Verifica con el asesor antes de reenviar para evitar duplicados.':'No pudimos confirmar el envío. Conservamos tus respuestas en esta página. Revisa tu conexión e inténtalo de nuevo.';}finally{clearTimeout(timer);busy=false;buttons.forEach(b=>b.disabled=false);}};
+form.onsubmit=async e=>{e.preventDefault();if(busy||!enabled)return;if(step!==8){show(8,true);return;}if(!identityValid())return;if(!total()){show(4,true);status.textContent='Ajusta la distribución del tiempo hasta sumar 100%.';return;}if(!document.querySelector('#consent').checked){status.textContent='Confirma que revisaste tus respuestas para enviarlas.';document.querySelector('#consent').focus();return;}busy=true;const buttons=[...document.querySelectorAll('button')];buttons.forEach(b=>b.disabled=true);status.textContent='Enviando respuestas…';status.className='';const payload={Nombre:form.elements.Nombre.value.trim(),email:form.elements.email.value.trim(),_subject:'Diagnóstico administrativo BFIT y FTN',Version:'BFIT-ADMIN-2',Disponibilidad:form.elements.Disponibilidad.value,Documentos:form.elements.Documentos.value};sections.forEach(s=>s.questions.forEach(q=>payload[`${q[0]}. ${q[1]}`]=answer(q).trim()||'Pendiente / sin respuesta'));const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),30000);try{const res=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload),signal:controller.signal});const result=await res.json();if(!res.ok||result.errors||result.error)throw new Error('server');form.hidden=true;nav.hidden=true;document.querySelector('.progress-row').hidden=true;document.querySelector('#success').hidden=false;document.querySelector('#success').focus();}catch(err){status.className='error';status.textContent=err.name==='AbortError'?'No pudimos confirmar la recepción a tiempo. Conservamos tus respuestas en esta página. Verifica con el asesor antes de reenviar para evitar duplicados.':'No pudimos confirmar el envío. Conservamos tus respuestas en esta página. Revisa tu conexión e inténtalo de nuevo.';}finally{clearTimeout(timer);busy=false;buttons.forEach(b=>b.disabled=false);}};
 total();show(0);document.querySelector('#app').hidden=false;

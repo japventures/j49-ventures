@@ -28,7 +28,7 @@ const sections = [
       [
         3,
         "¿Qué comportamientos o capacidades necesita desarrollar Claudia?",
-        "Describe hechos observables, su efecto y lo que esperas que cambie.",
+        "Describe hasta tres hechos observables de los últimos tres meses, su efecto y el cambio esperado. Evita juicios sobre la personalidad.",
         "rows",
         [
           "Situación observada",
@@ -133,7 +133,7 @@ const sections = [
       [
         11,
         "¿Qué obstáculos de Dirección u otras áreas dificultan que Claudia cumpla?",
-        "Selecciona lo que aplique y explica qué apoyo podrías aportar.",
+        "Selecciona lo que aplique. Distingue lo que depende de Claudia de lo que requiere apoyo tuyo o de otras áreas.",
         "checks",
         [
           "Prioridades cambiantes",
@@ -238,7 +238,7 @@ document.querySelector('#back').onclick=()=>show(Math.max(0,step-1),true);
 document.querySelector('#next').onclick=()=>{if(step===0&&(!identityValid()||!prioritiesValid()))return;if(step===4&&!total()){status.textContent='La distribución debe sumar 100% antes de continuar.';return;}show(Math.min(sections.length,step+1),true);};
 const endpoint=window.BFIT_FORM_CONFIG?.endpoint||'',enabled=/^https:\/\/formspree\.io\/(?:p\/[0-9]+\/)?f\/[a-zA-Z0-9]+$/.test(endpoint);
 document.querySelector('#setup').hidden=enabled;document.querySelector('#send').disabled=!enabled;
-form.onsubmit=async e=>{e.preventDefault();if(busy||!enabled)return;if(step!==sections.length){show(sections.length,true);return;}if(!identityValid()||!prioritiesValid())return;if(!total()){show(4,true);status.textContent='Ajusta la distribución del tiempo hasta sumar 100%.';return;}if(!document.querySelector('#consent').checked){status.textContent='Confirma que revisaste tus respuestas para enviarlas.';document.querySelector('#consent').focus();return;}busy=true;const buttons=[...document.querySelectorAll('button')];buttons.forEach(b=>b.disabled=true);status.textContent='Enviando respuestas…';status.className='';const payload={Nombre:form.elements.Nombre.value.trim(),email:form.elements.email.value.trim(),_subject:'Perspectiva CEO BFIT · J49',Version:'CEO-1',Empresa:'BFIT'};sections.forEach(s=>s.questions.forEach(q=>payload[`${q[0]}. ${q[1]}`]=answer(q).trim()||'Pendiente / sin respuesta'));const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),30000);try{const res=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload),signal:controller.signal});const result=await res.json();if(!res.ok||result.errors||result.error)throw new Error('server');form.hidden=true;nav.hidden=true;document.querySelector('.progress-row').hidden=true;document.querySelector('#success').hidden=false;document.querySelector('#success').focus();}catch(err){status.className='error';status.textContent=err.name==='AbortError'?'No pudimos confirmar la recepción a tiempo. Conservamos tus respuestas en esta página. Verifica con el asesor antes de reenviar para evitar duplicados.':'No pudimos confirmar el envío. Conservamos tus respuestas en esta página. Revisa tu conexión e inténtalo de nuevo.';}finally{clearTimeout(timer);busy=false;buttons.forEach(b=>b.disabled=false);}};
+form.onsubmit=async e=>{e.preventDefault();if(busy||!enabled)return;if(step!==sections.length){show(sections.length,true);return;}if(!identityValid()||!prioritiesValid())return;if(!total()){show(4,true);status.textContent='Ajusta la distribución del tiempo hasta sumar 100%.';return;}if(!document.querySelector('#consent').checked){status.textContent='Confirma que revisaste tus respuestas para enviarlas.';document.querySelector('#consent').focus();return;}busy=true;const buttons=[...document.querySelectorAll('button')];buttons.forEach(b=>b.disabled=true);status.textContent='Enviando respuestas…';status.className='';const payload={Nombre:form.elements.Nombre.value.trim(),email:form.elements.email.value.trim(),_subject:'Perspectiva CEO BFIT · Jorge',Version:'CEO-2',Empresa:'BFIT'};sections.forEach(s=>s.questions.forEach(q=>payload[`${q[0]}. ${q[1]}`]=answer(q).trim()||'Pendiente / sin respuesta'));const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),30000);try{const res=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload),signal:controller.signal});const result=await res.json();if(!res.ok||result.errors||result.error)throw new Error('server');form.hidden=true;nav.hidden=true;document.querySelector('.progress-row').hidden=true;document.querySelector('#success').hidden=false;document.querySelector('#success').focus();}catch(err){status.className='error';status.textContent=err.name==='AbortError'?'No pudimos confirmar la recepción a tiempo. Conservamos tus respuestas en esta página. Verifica con el asesor antes de reenviar para evitar duplicados.':'No pudimos confirmar el envío. Conservamos tus respuestas en esta página. Revisa tu conexión e inténtalo de nuevo.';}finally{clearTimeout(timer);busy=false;buttons.forEach(b=>b.disabled=false);}};
 total();show(0);document.querySelector('#app').hidden=false;
 
 // Keep exclusive options consistent and limit the risk priorities to three.

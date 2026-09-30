@@ -2,7 +2,7 @@ name: Formspree J49
 on:
   workflow_dispatch:
   push:
-    branches: [main, codex/ceo-priorities]
+    branches: [main, codex/polish-questionnaires]
     paths: ['bfit-admin/**', 'bfit-ceo/**', 'ftn-ceo/**', 'scripts/test-ceo.cjs', 'formspree.json', 'scripts/test-bfit.cjs', '.github/workflows/formspree.yml']
 permissions:
   contents: read
